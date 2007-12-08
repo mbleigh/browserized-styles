@@ -46,7 +46,7 @@ module BrowserizedStyles
       browserized_source = "#{subbed_source.to_s}_#{browser_name}"
       path = File.join(ActionView::Helpers::AssetTagHelper::STYLESHEETS_DIR,"#{browserized_source}.css")
       browserized_sources << source
-      browserized_sources << browserized_source
+      browserized_sources << browserized_source if File.exist?(path)
     end
   
     stylesheet_link_tag_without_browserization(*browserized_sources)
