@@ -42,11 +42,9 @@ module BrowserizedStyles
   def stylesheet_link_tag_with_browserization(*sources)
     browserized_sources = Array.new
     sources.each do |source|
-      source.gsub!(".css","")
-      browserized_source = "#{source.to_s}_#{browser_name}"
+      subbed_source = source.to_s.gsub(".css","")
+      browserized_source = "#{subbed_source.to_s}_#{browser_name}"
       path = File.join(ActionView::Helpers::AssetTagHelper::STYLESHEETS_DIR,"#{browserized_source}.css")
-      puts path
-      puts File.exist?(path)
       browserized_sources << source
       browserized_sources << browserized_source
     end
