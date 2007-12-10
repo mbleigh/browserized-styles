@@ -1,8 +1,8 @@
 == BrowserizedStyles ==
 
-Browserized Styles provides a dead simple way to create browser-specific CSS code for
-use in a Rails application. All you need to do is create a .css file targeted to
-a browser by appending an underscore and identifier to the end.
+Browserized Styles provides a dead simple way to create browser and operating sytem-specific 
+CSS code for use in a Rails application. All you need to do is create a .css file targeted to
+a browser by appending an underscore and identifiers to the end.
 
 === Installation ===
 
@@ -25,8 +25,10 @@ styles!
 
 === Identifiers ===
 
-Browsers are identified as following. You would create the CSS file as 
-"yourcssfile_browsername.css"
+Browsers and OS's are identified as following. You would create the CSS file as 
+"yourcssfile_browsername.css" or "yourcssfile_osname" or "yourcssfile_browsername_osname"
+
+==== Browsers ====
 
 IE6:       ie6
 IE7:       ie7
@@ -35,14 +37,25 @@ Firefox:   gecko
 Safari:    safari
 Konqueror: konqueror
 
-=== Limitations ===
+==== Operating Systems ====
+
+Mac OS (X or prior): mac
+Windows (any): win
+Linux: linux
+
+=== Limitations and Caveats ===
 
 At this time the plugin is only designed to work with .css files in your stylesheets 
 directory. It will not work at present with URL-based stylesheets or stylesheets not
 found in your stylesheets directory (or some subdirectory thereof).
 
+At the moment, stylesheets are included in this order: original, browser-specific, 
+os-specific, browser-and-os-specific. This is logically from least to most specific,
+but if you need a different order you will have to hack it manually.
+
 === Resources ===
 
+Blog Article: http://www.intridea.com/2007/12/9/announcing-browserized-styles
 Trac: http://trac.intridea.com/trac/public/
 SVN: script/plugin install http://svn.intridea.com/svn/public/browserized_styles
 

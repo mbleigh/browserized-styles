@@ -39,14 +39,39 @@ module BrowserizedStyles
     end
   end
   
+  def browser_os
+    @browser_od ||= begin
+      ua = request.env['HTTP_USER_AGENT']
+      return nil if ua.nil?
+      ua.downcase!
+      
+      if ua.include?('mac os x') or ua.include?('mac_powerpc')
+        'mac'
+      elsif ua.include?('windows')
+        'win'
+      elsif ua.include?('linux')
+        'linux'
+      else
+        nil
+      end
+    end
+  end
+  
   def stylesheet_link_tag_with_browserization(*sources)
     browserized_sources = Array.new
     sources.each do |source|
       subbed_source = source.to_s.gsub(".css","")
-      browserized_source = "#{subbed_source.to_s}_#{browser_name}"
-      path = File.join(ActionView::Helpers::AssetTagHelper::STYLESHEETS_DIR,"#{browserized_source}.css")
+      
+      possible_sources = ["#{subbed_source.to_s}_#{browser_name}", 
+                          "#{subbed_source.to_s}_#{browser_os}", 
+                          "#{subbed_source.to_s}_#{browser_name}_#{browser_os}"]
+      
       browserized_sources << source
-      browserized_sources << browserized_source if File.exist?(path)
+      
+      for possible_source in possible_sources
+        path = File.join(ActionView::Helpers::AssetTagHelper::STYLESHEETS_DIR,"#{possible_source}.css")
+        browserized_sources << possible_source if File.exist?(path)
+      end
     end
   
     stylesheet_link_tag_without_browserization(*browserized_sources)
