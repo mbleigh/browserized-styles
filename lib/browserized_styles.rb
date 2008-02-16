@@ -39,6 +39,10 @@ module BrowserizedStyles
     end
   end
   
+  def ie?
+    browser_name[0..1] == "ie"
+  end
+  
   def browser_os
     @browser_od ||= begin
       ua = request.env['HTTP_USER_AGENT']
@@ -65,6 +69,8 @@ module BrowserizedStyles
       possible_sources = ["#{subbed_source.to_s}_#{browser_name}", 
                           "#{subbed_source.to_s}_#{browser_os}", 
                           "#{subbed_source.to_s}_#{browser_name}_#{browser_os}"]
+      
+      possible_sources.unshift("#{subbed_source.to_s}_ie") if ie?
       
       browserized_sources << source
       
