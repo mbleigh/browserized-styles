@@ -76,7 +76,7 @@ module BrowserizedStyles
       
       for possible_source in possible_sources
         path = File.join(ActionView::Helpers::AssetTagHelper::STYLESHEETS_DIR,"#{possible_source}.css")
-        sass_path = File.join(ActionView::Helpers::AssetTagHelper::STYLESHEETS_DIR,"sass","#{possible_source}.sass"
+        sass_path = File.join(ActionView::Helpers::AssetTagHelper::STYLESHEETS_DIR,"sass","#{possible_source}.sass")
         browserized_sources << possible_source if File.exist?(path) || File.exist?(sass_path)
       end
     end
