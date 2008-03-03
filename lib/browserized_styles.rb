@@ -40,7 +40,7 @@ module BrowserizedStyles
   end
   
   def ie?
-    browser_name[0..1] == "ie"
+    browser_name && browser_name[0..1] == "ie"
   end
   
   def browser_os
