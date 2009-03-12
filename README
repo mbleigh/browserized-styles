@@ -6,7 +6,7 @@ a browser by appending an underscore and identifiers to the end.
 
 === Installation ===
 
-script/plugin install http://svn.intridea.com/svn/public/browserized_styles
+script/plugin install git://github.com/mbleigh/browserized-styles.git
 
 === Example ===
 
